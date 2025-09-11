@@ -1,0 +1,29 @@
+// Hero Section Styles
+.hero-section {
+  .overlay-dark {
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  // Responsive background images
+  .hero-bg-desktop {
+    display: block;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .hero-bg-mobile {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+}

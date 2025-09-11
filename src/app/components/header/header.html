@@ -1,0 +1,74 @@
+<!-- Hero Section -->
+<section id="home" class="hero-section relative h-screen w-full overflow-hidden">
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0 bg-cover bg-center bg-no-repeat animate-zoom-in hero-bg-desktop"
+       [style.background-image]="'url(' + heroBackgroundImage + ')'">
+    <div class="overlay-dark"></div>
+  </div>
+
+  <!-- Mobile Background Image -->
+  <div class="absolute inset-0 bg-cover bg-center bg-no-repeat animate-zoom-in hero-bg-mobile"
+       [style.background-image]="'url(' + heroBackgroundMobile + ')'">
+    <div class="overlay-dark md:bg-black/40 bg-black/70"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="relative z-20 flex justify-between items-center container-custom py-6">
+    <!-- Logo/Brand -->
+    <div class="text-white font-serif text-2xl font-semibold">
+    Aruvam Enterprise
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex space-x-8">
+      <a (click)="scrollToSection('home')" class="nav-link cursor-pointer">Home</a>
+      <a (click)="scrollToSection('projects')" class="nav-link cursor-pointer">Projects</a>
+      <a (click)="scrollToSection('about')" class="nav-link cursor-pointer">About</a>
+      <a (click)="scrollToSection('contact')" class="nav-link cursor-pointer">Contact</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button mat-icon-button class="md:hidden text-white" (click)="toggleMobileMenu()">
+      <mat-icon>{{ mobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="md:hidden fixed inset-0 z-30 bg-black bg-opacity-95 transition-opacity duration-300"
+       [class.opacity-0]="!mobileMenuOpen"
+       [class.opacity-100]="mobileMenuOpen"
+       [class.pointer-events-none]="!mobileMenuOpen">
+    <div class="flex flex-col items-center justify-center h-full space-y-8">
+      <a (click)="scrollToSection('home')" class="nav-link text-2xl cursor-pointer">Home</a>
+      <a (click)="scrollToSection('projects')" class="nav-link text-2xl cursor-pointer">Projects</a>
+      <a (click)="scrollToSection('about')" class="nav-link text-2xl cursor-pointer">About</a>
+      <a (click)="scrollToSection('contact')" class="nav-link text-2xl cursor-pointer">Contact</a>
+    </div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 flex items-center justify-center h-full container-custom">
+    <div class="text-center lg:text-left max-w-4xl animate-fade-in">
+      <h1 class="heading-xl text-white md:drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] mb-6">
+        Create<br>
+        <span class="text-gradient md:bg-gradient-to-br md:from-accent md:to-muted-gold bg-gradient-to-br from-yellow-300 to-amber-400 bg-clip-text text-transparent md:drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Comfort</span>
+      </h1>
+      <p class="body-lg md:text-gray-300 text-white md:drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] mb-8 max-w-2xl md:font-normal font-medium">
+        Modern Interior Design & Architecture
+      </p>
+      <p class="body-md md:text-gray-400 text-gray-50 md:drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] space-element max-w-xl md:font-normal font-medium">
+        Transforming spaces into extraordinary experiences through innovative design and meticulous attention to detail.
+      </p>
+
+      <!-- CTA Button with Glass Effect -->
+      <button mat-raised-button class="btn-glass" (click)="exploreWork()">
+        Explore Our Work
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce cursor-pointer" (click)="scrollToNextSection()">
+    <mat-icon class="text-white text-3xl hover:text-accent transition-colors duration-300">keyboard_arrow_down</mat-icon>
+  </div>
+</section>

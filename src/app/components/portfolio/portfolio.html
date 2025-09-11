@@ -1,0 +1,221 @@
+<!-- Ultra-Lightweight Portfolio Section -->
+<section class="min-h-screen bg-gradient-to-br from-dark via-charcoal to-dark py-20 relative">
+  <!-- Minimal Background Elements -->
+  <div class="absolute top-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-30"></div>
+  <div class="absolute bottom-20 right-10 w-80 h-80 bg-accent/5 rounded-full blur-3xl opacity-20"></div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    
+    <!-- Optimized Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8">
+        Featured <span class="text-accent">Projects</span>
+      </h2>
+      <div class="max-w-3xl mx-auto bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <p class="text-lg text-white/90 leading-relaxed">
+          Discover our latest interior design projects that showcase our commitment to creating beautiful, functional spaces.
+        </p>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+            <div class="h-64 bg-white/5 animate-pulse"></div>
+            <div class="p-6">
+              <div class="h-4 bg-white/10 rounded animate-pulse mb-3"></div>
+              <div class="h-6 bg-white/10 rounded animate-pulse mb-2"></div>
+              <div class="h-4 bg-white/10 rounded animate-pulse w-3/4"></div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Optimized Project Grid -->
+    @if (!isLoading()) {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (project of projects(); track trackByProject($index, project)) {
+          <div class="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:bg-white/10 transition-colors duration-300">
+            
+            <!-- Project Image -->
+            <div class="relative h-64 overflow-hidden">
+              <!-- Skeleton Loader -->
+              @if (!imageLoadStates()[project.id]) {
+                <div class="absolute inset-0 bg-white/5 animate-pulse flex items-center justify-center">
+                  <div class="w-8 h-8 border-2 border-white/20 border-t-yellow-400 rounded-full animate-spin"></div>
+                </div>
+              }
+              
+              <!-- Lazy Loaded Image -->
+              <img
+                [src]="project.mainImage"
+                [alt]="project.title"
+                class="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                [class.opacity-0]="!imageLoadStates()[project.id]"
+                [class.opacity-100]="imageLoadStates()[project.id]"
+                (load)="onImageLoad(project.id)"
+                (error)="onImageError($event, 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80')">
+              
+              <!-- Category Badge -->
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-bold rounded-lg uppercase tracking-wide">
+                  {{ project.category }}
+                </span>
+              </div>
+              
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <button 
+                  (click)="openProject(project)"
+                  class="px-6 py-3 bg-white/20 hover:bg-yellow-400 hover:text-gray-900 text-white rounded-lg font-medium transition-colors duration-200 border border-white/30">
+                  View Project
+                </button>
+              </div>
+            </div>
+            
+            <!-- Project Info -->
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
+                {{ project.title }}
+              </h3>
+              <p class="text-white/70 text-sm line-clamp-2 mb-4">
+                {{ project.description }}
+              </p>
+              
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</section>
+
+<!-- Ultra-Lightweight Modal with Slideshow -->
+@if (selectedProject()) {
+  <div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm" (click)="closeProject()">
+    
+    <!-- Modal Container -->
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative w-full max-w-6xl max-h-[90vh] bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20"
+           (click)="$event.stopPropagation()">
+
+        <!-- Close Button -->
+        <button (click)="closeProject()"
+                class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200">
+          <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Slideshow Container -->
+        <div class="relative">
+          
+          <!-- Main Image -->
+          <div class="relative h-96 md:h-[500px] overflow-hidden bg-black flex items-center justify-center">
+            <img 
+              [src]="selectedProject()!.images[currentSlideIndex()].src" 
+              [alt]="selectedProject()!.images[currentSlideIndex()].alt"
+              class="max-w-full max-h-full w-auto h-auto object-contain">
+            
+            <!-- Image Counter -->
+            <div class="absolute top-4 left-4 px-3 py-1 bg-black/50 text-white text-sm rounded-lg">
+              {{ currentSlideIndex() + 1 }} / {{ selectedProject()!.images.length }}
+            </div>
+          </div>
+          
+          <!-- Navigation Arrows (only show if more than 1 image) -->
+          @if (selectedProject()!.images.length > 1) {
+            <button (click)="previousSlide()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200">
+              <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+
+            <button (click)="nextSlide()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200">
+              <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          }
+        </div>
+        
+        <!-- Project Details -->
+        <div class="p-6 bg-gradient-to-br from-white/5 to-transparent">
+          
+          <!-- Project Header -->
+          <div class="mb-6">
+            <span class="inline-block px-4 py-2 bg-yellow-400 text-gray-900 text-sm font-bold rounded-lg uppercase tracking-wide mb-3">
+              {{ selectedProject()!.category }}
+            </span>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">{{ selectedProject()!.title }}</h2>
+            <p class="text-white/80">{{ selectedProject()!.description }}</p>
+          </div>
+          
+          <!-- Project Meta Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            @if (selectedProject()!.year) {
+              <div class="text-center p-3 bg-white/5 rounded-xl border border-white/10">
+                <div class="text-yellow-400 text-sm font-medium">Year</div>
+                <div class="text-white font-bold">{{ selectedProject()!.year }}</div>
+              </div>
+            }
+            @if (selectedProject()!.location) {
+              <div class="text-center p-3 bg-white/5 rounded-xl border border-white/10">
+                <div class="text-yellow-400 text-sm font-medium">Location</div>
+                <div class="text-white font-bold">{{ selectedProject()!.location }}</div>
+              </div>
+            }
+            @if (selectedProject()!.area) {
+              <div class="text-center p-3 bg-white/5 rounded-xl border border-white/10">
+                <div class="text-yellow-400 text-sm font-medium">Area</div>
+                <div class="text-white font-bold">{{ selectedProject()!.area }}</div>
+              </div>
+            }
+            @if (selectedProject()!.client) {
+              <div class="text-center p-3 bg-white/5 rounded-xl border border-white/10">
+                <div class="text-yellow-400 text-sm font-medium">Client</div>
+                <div class="text-white font-bold">{{ selectedProject()!.client }}</div>
+              </div>
+            }
+          </div>
+          
+          <!-- Image Thumbnails (only show if more than 1 image) -->
+          @if (selectedProject()!.images.length > 1) {
+            <div class="flex gap-2 overflow-x-auto pb-2 mb-6">
+              @for (image of selectedProject()!.images; track trackByImage($index, image)) {
+                <button 
+                  (click)="goToSlide($index)"
+                  class="flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200"
+                  [class.border-yellow-400]="$index === currentSlideIndex()"
+                  [class.border-white/20]="$index !== currentSlideIndex()">
+                  <img [src]="image.src" [alt]="image.alt" class="w-full h-full object-cover">
+                </button>
+              }
+            </div>
+          }
+          
+          <!-- Tags -->
+          @if (selectedProject()!.tags?.length) {
+            <div>
+              <h4 class="text-white font-medium mb-3">Tags</h4>
+              <div class="flex flex-wrap gap-2">
+                @for (tag of selectedProject()!.tags; track tag) {
+                  <span class="px-3 py-1 bg-white/10 text-white/80 rounded-lg text-sm border border-white/20">
+                    {{ tag }}
+                  </span>
+                }
+              </div>
+            </div>
+          }
+          
+        </div>
+      </div>
+    </div>
+  </div>
+}

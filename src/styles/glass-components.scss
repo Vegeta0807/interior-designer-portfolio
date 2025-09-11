@@ -1,0 +1,127 @@
+/* Glass Morphism Component Classes */
+
+/* Base Glass Effects */
+@layer components {
+  .glass-light {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .glass-medium {
+    @apply bg-white/[0.08] backdrop-blur-lg border border-white/15;
+  }
+  
+  .glass-strong {
+    @apply bg-white/12 backdrop-blur-xl border border-white/20;
+  }
+  
+  .glass-ultra {
+    @apply bg-white/15 backdrop-blur-2xl border border-white/25;
+  }
+
+  /* Glass Containers */
+  .glass-container {
+    @apply glass-medium rounded-2xl shadow-xl;
+  }
+  
+  .glass-container-large {
+    @apply glass-strong rounded-3xl shadow-2xl;
+  }
+
+  /* Glass Cards */
+  .glass-card {
+    @apply glass-light rounded-xl p-6 shadow-lg hover:glass-medium transition-all duration-300;
+  }
+  
+  .glass-card-interactive {
+    @apply glass-card hover:scale-105 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  /* Glass Buttons */
+  .glass-btn {
+    @apply glass-light px-6 py-3 rounded-full font-medium transition-all duration-300;
+  }
+  
+  .glass-btn-primary {
+    @apply glass-btn hover:bg-accent/90 hover:text-dark hover:scale-105;
+  }
+  
+  .glass-btn-icon {
+    @apply glass-light w-12 h-12 rounded-full flex items-center justify-center hover:glass-strong hover:scale-110 transition-all duration-300;
+  }
+
+  /* Glass Navigation */
+  .glass-nav-arrow {
+    @apply glass-btn-icon w-16 h-16 rounded-2xl hover:bg-accent/90 hover:text-dark hover:scale-125 hover:-translate-y-2 shadow-xl;
+  }
+
+  /* Glass Text Effects */
+  .glass-text-shadow {
+    @apply drop-shadow-lg;
+  }
+  
+  .glass-text-shadow-strong {
+    @apply drop-shadow-xl;
+  }
+
+  /* Glass Overlays */
+  .glass-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent;
+  }
+  
+  .glass-overlay-strong {
+    @apply absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent;
+  }
+
+  /* Glass Thumbnails */
+  .glass-thumbnail {
+    @apply glass-light rounded-xl overflow-hidden border-2 border-transparent transition-all duration-500 shadow-lg;
+  }
+  
+  .glass-thumbnail-active {
+    @apply border-accent scale-110 glass-medium;
+  }
+  
+  .glass-thumbnail:hover {
+    @apply scale-105 -translate-y-1 shadow-xl;
+  }
+
+  /* Glass Progress Indicators */
+  .glass-progress {
+    @apply w-4 h-4 rounded-full glass-light border-2 border-white/30 transition-all duration-500 shadow-sm;
+  }
+  
+  .glass-progress-active {
+    @apply bg-accent border-accent scale-150 shadow-accent/50;
+  }
+  
+  .glass-progress:hover {
+    @apply scale-150;
+  }
+
+  /* Glass Modal */
+  .glass-modal-backdrop {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-lg;
+  }
+  
+  .glass-modal-content {
+    @apply glass-ultra rounded-3xl shadow-2xl;
+  }
+
+  /* Glass Loading States */
+  .glass-skeleton {
+    @apply glass-light animate-pulse;
+  }
+
+  /* Glass Ambient Orbs */
+  .glass-orb {
+    @apply absolute rounded-full blur-3xl animate-pulse;
+  }
+  
+  .glass-orb-accent {
+    @apply glass-orb bg-accent/6;
+  }
+  
+  .glass-orb-white {
+    @apply glass-orb bg-white/3;
+  }
+}

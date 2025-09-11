@@ -1,0 +1,106 @@
+<!-- About Section -->
+<section id="about" class="section-padding gradient-dark">
+  <div class="container-custom">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Left Content -->
+      <div class="animate-slide-in-left">
+        <h2 class="heading-lg text-white space-element">
+          Creating Spaces That
+          <span class="text-gradient">Inspire</span>
+        </h2>
+
+        <div class="space-y-6">
+          <p class="body-lg text-gray-300">
+            With over a decade of experience in interior design and architecture, we transform ordinary spaces into extraordinary experiences that reflect your unique style and enhance your daily life.
+          </p>
+
+          <p class="body-md text-gray-400">
+            Our approach combines innovative design thinking with meticulous attention to detail, ensuring every project tells a compelling story through thoughtful space planning, curated materials, and bespoke furnishings.
+          </p>
+
+          <div class="grid grid-cols-2 gap-8 py-8">
+            <div class="text-center">
+              <div class="heading-md text-accent mb-2">150+</div>
+              <div class="body-sm text-gray-400">Projects Completed</div>
+            </div>
+            <div class="text-center">
+              <div class="heading-md text-accent mb-2">12+</div>
+              <div class="body-sm text-gray-400">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image Collage -->
+      <div class="animate-slide-in-right">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Large Image -->
+          <div class="col-span-2 card-portfolio">
+            <img
+              [src]="aboutImages.collage1"
+              alt="Interior Design Project Showcase"
+              class="w-full h-64 lg:h-80 object-cover"
+              loading="lazy">
+            <div class="card-portfolio-overlay">
+              <div class="text-yellow-400 text-center drop-shadow-xl glass-dark rounded-md px-4 py-2">
+                <h4 class="heading-sm mb-2">Modern Living</h4>
+                <p class="body-sm">Contemporary residential design</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two Smaller Images -->
+          <div class="card-portfolio">
+            <img
+              [src]="aboutImages.collage2"
+              alt="Luxury Interior Design"
+              class="w-full h-32 lg:h-40 object-cover"
+              loading="lazy">
+            <div class="card-portfolio-overlay">
+              <div class="text-yellow-400 text-center drop-shadow-xl glass-dark rounded-md px-4 py-2">
+                <h5 class="text-yellow-400 font-semibold mb-1">Luxury Spaces</h5>
+                <p class="text-yellow-400">Premium finishes</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-portfolio">
+            <img
+              [src]="aboutImages.collage3"
+              alt="Commercial Interior Design"
+              class="w-full h-32 lg:h-40 object-cover"
+              loading="lazy">
+            <div class="card-portfolio-overlay">
+              <div class="text-white text-center drop-shadow-xl glass-dark rounded-md px-4 py-2">
+                <h5 class="text-yellow-400 font-semibold mb-1">Commercial</h5>
+                <p class="text-yellow-400">Workspace design</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="mt-20 lg:mt-32">
+      <div class="text-center space-element animate-on-scroll">
+        <h3 class="heading-md text-white mb-4">Our Services</h3>
+        <p class="body-lg text-gray-400 max-w-2xl mx-auto">
+          From concept to completion, we offer comprehensive design services tailored to your vision and lifestyle.
+        </p>
+      </div>
+
+  <div class="grid-services mt-12 rounded-2xl p-8">
+
+  <div class="glass-light shadow-lg rounded-xl p-6 mb-6 flex flex-col items-center animate-slide-in-up" *ngFor="let service of services; let i = index">
+        <div class="text-accent text-4xl mb-4">
+          <mat-icon class="text-4xl">{{ service.icon }}</mat-icon>
+        </div>
+        <h4 class="text-lg font-semibold text-accent mb-2">{{ service.title }}</h4>
+        <p class="text-base text-neutral-light text-center">{{ service.description }}</p>
+      </div>
+  </div>
+    </div>
+  </div>
+</section>

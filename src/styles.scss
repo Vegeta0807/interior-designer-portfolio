@@ -1,0 +1,445 @@
+
+/* ===== ANGULAR MATERIAL THEMING ===== */
+@use '@angular/material' as mat;
+
+/* ===== TAILWIND CSS IMPORTS ===== */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Glass Morphism Components */
+@import './styles/glass-components.scss';
+
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ===== GLOBAL RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container-custom {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+  .section-padding, .section-padding-sm {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: theme('colors.neutral-dark');
+  height: 100%;
+  margin: 0;
+  background-color: #ffffff;
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TYPOGRAPHY CLASSES ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heading-xl {
+  font-size: 3.75rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .heading-xl {
+    font-size: 6rem;
+  }
+}
+
+.heading-lg {
+  font-size: 2.25rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+@media (min-width: 1024px) {
+  .heading-lg {
+    font-size: 3.75rem;
+  }
+}
+
+.heading-md {
+  font-size: 1.875rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .heading-md {
+    font-size: 2.25rem;
+  }
+}
+
+.heading-sm {
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .heading-sm {
+    font-size: 1.875rem;
+  }
+}
+
+.body-lg {
+  font-size: 1.125rem;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.625;
+}
+
+@media (min-width: 1024px) {
+  .body-lg {
+    font-size: 1.25rem;
+  }
+}
+
+.body-md {
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.625;
+}
+
+@media (min-width: 1024px) {
+  .body-md {
+    font-size: 1.125rem;
+  }
+}
+
+.body-sm {
+  font-size: 0.875rem;
+  font-family: 'Inter', sans-serif;
+}
+
+@media (min-width: 1024px) {
+  .body-sm {
+    font-size: 1rem;
+  }
+}
+
+/* ===== LAYOUT UTILITIES ===== */
+.container-custom {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.section-padding-sm {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .section-padding-sm {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* ===== GLASSMORPHISM EFFECTS ===== */
+/* Glass effects are now defined in tailwind.config.js as utilities */
+
+/* ===== BUTTON STYLES ===== */
+.btn-primary {
+  background-color: theme('colors.accent');
+  color: theme('colors.dark');
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: theme('colors.muted-gold');
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px theme('colors.accent');
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid theme('colors.accent');
+  color: theme('colors.accent');
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: theme('colors.accent');
+  color: theme('colors.dark');
+  box-shadow: 0 8px 25px theme('colors.accent');
+}
+
+
+
+/* ===== CARD STYLES ===== */
+.card-hover {
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.card-portfolio {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.card-portfolio-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-portfolio:hover .card-portfolio-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ===== SPACING UTILITIES ===== */
+.space-section {
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .space-section {
+    margin-bottom: 6rem;
+  }
+}
+
+.space-element {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .space-element {
+    margin-bottom: 3rem;
+  }
+}
+
+/* ===== OVERLAY UTILITIES ===== */
+/* Overlay utilities are now defined in tailwind.config.js */
+
+/* ===== RESPONSIVE GRID UTILITIES ===== */
+.grid-portfolio {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-portfolio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-portfolio {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.grid-services {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-services {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ===== SCROLL UTILITIES ===== */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.neutral-light');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.accent');
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.muted-gold');
+}
+
+/* ===== ADDITIONAL COMPONENT STYLES ===== */
+/* Component-specific styles have been moved to their respective component files */
+
+/* Modal Animations */
+.modal-backdrop {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Loading Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Intersection Observer Animations */
+/* Animation utilities are now defined in tailwind.config.js */
+
+/* Stagger Animation for Grid Items */
+.stagger-animation {
+  animation-delay: calc(var(--stagger-delay, 0) * 0.1s);
+}
+
+/* Smooth Focus Styles */
+/* Focus styles are now defined in tailwind.config.js form utilities */
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .heading-xl {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  .heading-lg {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

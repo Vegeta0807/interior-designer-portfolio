@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "name": "Beds",
+      "images": [
+        "IMG_1583.JPG",
+        "IMG_1584.JPG",
+        "IMG_1596.JPG",
+        "IMG_1598.JPG"
+      ]
+    },
+    {
+      "name": "Dining and chairs",
+      "images": [
+        "IMG_1578.JPG",
+        "IMG_1587.JPG",
+        "IMG_1588.JPG",
+        "IMG_1589.JPG",
+        "IMG_1590.JPG",
+        "IMG_1592.JPG"
+      ]
+    },
+    {
+      "name": "Sofa",
+      "images": [
+        "51ebe4a74c22b943c954b76624f4d199.jpg",
+        "deb699a1da93b218e028cc91cee59a23.jpg",
+        "hero-bg-main (1) (1).jpg"
+      ]
+    }
+  ]
+}
