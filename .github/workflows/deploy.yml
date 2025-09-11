@@ -29,10 +29,13 @@ jobs:
       - name: Build
         run: npm run build -- --base-href /interior-designer-portfolio/
 
+      - name: List dist directory
+        run: ls -la dist/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/interior/browser
+          path: ./dist/interior-design-studio/browser
 
   deploy:
     needs: build
