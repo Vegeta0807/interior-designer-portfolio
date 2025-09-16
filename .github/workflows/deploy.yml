@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build -- --base-href /interior-designer-portfolio/
+        run: npm run build -- --base-href /
 
       - name: List dist directory
         run: ls -la dist/
