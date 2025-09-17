@@ -59,7 +59,7 @@
                 [class.opacity-100]="imageLoadStates()[project.id]"
                 (load)="onImageLoad(project.id)"
                 (error)="onImageError($event, 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80')"
-                fetchpriority="low">
+                fetchpriority="high">
               
               <!-- Category Badge -->
               <div class="absolute top-4 left-4">

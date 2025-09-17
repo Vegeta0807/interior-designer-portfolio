@@ -62,7 +62,9 @@ export class ImageSlideshow {
   
   onImageError(event: Event, fallbackSrc: string): void {
     const img = event.target as HTMLImageElement;
-    img.src = fallbackSrc;
+    if (img.src !== fallbackSrc) {
+      img.src = fallbackSrc;
+    }
   }
   
   trackByImage(index: number, image: SlideImage): string {
