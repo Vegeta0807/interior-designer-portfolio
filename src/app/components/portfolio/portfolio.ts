@@ -1,16 +1,19 @@
 import { Component, inject, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PortfolioImageService, PortfolioProject } from '../../services/portfolio-image.service';
+import { ImageSlideshow } from '../shared/image-slideshow/image-slideshow';
+import { ImageOptimizerService } from '../../services/image-optimizer.service';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageSlideshow],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './portfolio.html'
 })
 export class Portfolio implements OnInit, OnDestroy {
   private portfolioService = inject(PortfolioImageService);
+  private imageOptimizer = inject(ImageOptimizerService);
   private cdr = inject(ChangeDetectorRef);
 
   // Signals for reactive state management
@@ -28,6 +31,30 @@ export class Portfolio implements OnInit, OnDestroy {
     this.loadProjects();
     this.setupIntersectionObserver();
     this.setupKeyboardNavigation();
+    this.setupLazyLoading();
+  }
+  
+  private setupLazyLoading() {
+    // Use Intersection Observer API to load images only when they come into view
+    if ('IntersectionObserver' in window) {
+      const lazyImageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const lazyImage = entry.target as HTMLImageElement;
+            if (lazyImage.getAttribute('data-src')) {
+              lazyImage.src = lazyImage.getAttribute('data-src') || '';
+              lazyImage.removeAttribute('data-src');
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          }
+        });
+      });
+      
+      // Observe all images with data-src attribute
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        lazyImageObserver.observe(img);
+      });
+    }
   }
 
   ngOnDestroy() {

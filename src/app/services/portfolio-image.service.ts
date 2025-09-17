@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { ImageOptimizerService } from './image-optimizer.service';
 
 export interface ProjectImage {
   src: string;
   alt: string;
   isMain?: boolean;
+  thumbnail?: string; // Thumbnail version for faster loading
+  placeholder?: string; // Low-quality placeholder
 }
 
 export interface PortfolioProject {
@@ -25,9 +28,11 @@ export interface PortfolioProject {
 })
 export class PortfolioImageService {
   private readonly basePath = 'assets/images/portfolio';
+  private readonly optimizedBasePath = 'assets/optimized';
   private readonly manifestPath = 'assets/images/portfolio/portfolio-manifest.json';
   private folderImagesMap: Map<string, string[]> = new Map();
   private discoveredFolders: string[] = [];
+  private imageOptimizer = inject(ImageOptimizerService);
 
   private formatTitle(folderName: string): string {
     return folderName
@@ -114,16 +119,38 @@ export class PortfolioImageService {
         imageNames = this.folderImagesMap.get(folderName) || [];
       }
       const images: ProjectImage[] = [];
+      
+      // Preload queue for optimized loading
+      const preloadQueue: string[] = [];
+      
       for (const imageName of imageNames) {
         const imagePath = `${this.basePath}/${folderName}/${imageName}`;
+        
+        // Create optimized paths for thumbnails and placeholders
+        const thumbnailPath = `${this.optimizedBasePath}/${projectId}/thumbnails/${imageName}`;
+        const placeholderPath = `${this.optimizedBasePath}/${projectId}/placeholders/${imageName}`;
+        
         if (await this.imageExists(imagePath)) {
           images.push({
             src: imagePath,
             alt: `${this.formatTitle(folderName)} - Image ${images.length + 1}`,
-            isMain: images.length === 0
+            isMain: images.length === 0,
+            thumbnail: thumbnailPath,
+            placeholder: placeholderPath
           });
+          
+          // Add to preload queue (only first few images)
+          if (images.length < 3) {
+            preloadQueue.push(imagePath);
+          }
         }
       }
+      
+      // Preload first few images for better performance
+      if (preloadQueue.length > 0) {
+        this.imageOptimizer.queueImagesForPreload(preloadQueue);
+      }
+      
       return images;
     } catch (error) {
       return [];
