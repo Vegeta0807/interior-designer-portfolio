@@ -100,4 +100,13 @@ export class ImageSlideshow {
     };
     img.src = src;
   }
+  
+  // Only load thumbnails for current and adjacent slides
+  shouldLoadThumbnail(index: number): boolean {
+    const current = this.currentIndex();
+    // Load current, previous, and next thumbnails only
+    return index === current || 
+           index === (current - 1 + this.images.length) % this.images.length || 
+           index === (current + 1) % this.images.length;
+  }
 }

@@ -119,10 +119,14 @@ export class Portfolio implements OnInit, OnDestroy {
   }
 
   openProject(project: PortfolioProject) {
+    // Only load child images when a project is clicked
     this.selectedProject.set(project);
     this.currentSlideIndex.set(0);
     document.body.style.overflow = 'hidden';
     this.cdr.markForCheck();
+    
+    // Mark this project as having its images loaded
+    this.portfolioService.markProjectImagesAsLoaded(project.id);
   }
 
   closeProject() {

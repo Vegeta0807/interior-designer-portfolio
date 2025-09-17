@@ -7,6 +7,7 @@ export interface ProjectImage {
   isMain?: boolean;
   thumbnail?: string; // Thumbnail version for faster loading
   placeholder?: string; // Low-quality placeholder
+  isLoaded?: boolean; // Track if image has been loaded
 }
 
 export interface PortfolioProject {
@@ -21,6 +22,7 @@ export interface PortfolioProject {
   area?: string;
   client?: string;
   tags?: string[];
+  imagesLoaded?: boolean; // Track if all project images are loaded
 }
 
 @Injectable({
@@ -172,5 +174,30 @@ export class PortfolioImageService {
   async getProjectById(id: string): Promise<PortfolioProject | null> {
     const projects = await this.getProjects();
     return projects.find(p => p.id === id) || null;
+  }
+  
+  // Mark a project's images as loaded
+  markProjectImagesAsLoaded(projectId: string): void {
+    const projects = this.getProjects();
+    projects.then(allProjects => {
+      const project = allProjects.find(p => p.id === projectId);
+      if (project) {
+        project.imagesLoaded = true;
+      }
+    });
+  }
+  
+  // Mark a specific image as loaded
+  markImageAsLoaded(projectId: string, imageSrc: string): void {
+    const projects = this.getProjects();
+    projects.then(allProjects => {
+      const project = allProjects.find(p => p.id === projectId);
+      if (project) {
+        const image = project.images.find(img => img.src === imageSrc);
+        if (image) {
+          image.isLoaded = true;
+        }
+      }
+    });
   }
 }

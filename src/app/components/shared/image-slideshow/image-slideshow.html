@@ -52,7 +52,12 @@
         class="flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200"
         [class.border-yellow-400]="$index === currentIndex()"
         [class.border-white/20]="$index !== currentIndex()">
-        <img [src]="image.src" [alt]="image.alt" class="w-full h-full object-cover">
+        <!-- Only load thumbnail when it's the current slide or adjacent slides -->
+        <img 
+          [attr.data-src]="image.src" 
+          [src]="shouldLoadThumbnail($index) ? image.src : ''" 
+          [alt]="image.alt" 
+          class="w-full h-full object-cover">
       </button>
     }
   </div>
