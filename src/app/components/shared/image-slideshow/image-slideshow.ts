@@ -5,6 +5,8 @@ export interface SlideImage {
   src: string;
   alt: string;
   isMain?: boolean;
+  thumbnail?: string;
+  placeholder?: string;
 }
 
 @Component({
@@ -17,7 +19,7 @@ export interface SlideImage {
 export class ImageSlideshow {
   @Input() set images(value: SlideImage[]) {
     this._images = value;
-    this.preloadImages();
+    // Remove preloadImages() from here for lazy-loading
   }
   get images(): SlideImage[] {
     return this._images;
@@ -33,6 +35,11 @@ export class ImageSlideshow {
   private preloadedImages: Set<string> = new Set();
 
   constructor() {}
+  
+  ngOnInit() {
+    // Only preload images when component is initialized (modal opened)
+    this.preloadImages();
+  }
   
   nextSlide(): void {
     if (!this.images.length) return;
@@ -72,11 +79,12 @@ export class ImageSlideshow {
   }
   
   private preloadImages(): void {
+    // Reset preloadedImages and imageLoadStates for each modal open
+    this.preloadedImages.clear();
+    this.imageLoadStates.set({});
     if (!this.images.length) return;
-    
     // Always preload the first image
     this.preloadImage(this.images[0].src);
-    
     // Preload the next 2 images if they exist
     if (this.images.length > 1) {
       this.preloadImage(this.images[1].src);
@@ -105,10 +113,7 @@ export class ImageSlideshow {
   
   // Only load thumbnails for current and adjacent slides
   shouldLoadThumbnail(index: number): boolean {
-    const current = this.currentIndex();
-    // Load current, previous, and next thumbnails only
-    return index === current || 
-           index === (current - 1 + this.images.length) % this.images.length || 
-           index === (current + 1) % this.images.length;
+    // Always load all thumbnails
+    return true;
   }
 }

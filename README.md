@@ -1,59 +1,100 @@
 # InteriorDesignStudio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+A modern, responsive web application for showcasing interior design projects, portfolios, and services. Built with Angular, Tailwind CSS, and optimized for performance and accessibility.
 
-## Development server
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Scripts](#scripts)
+- [Customization](#customization)
+- [Contributing](#contributing)
+- [License](#license)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## Features
+- **Portfolio Showcase:** Display interior design projects with image slideshows and detailed descriptions.
+- **Image Optimization:** Automated scripts for optimizing and manifesting portfolio images.
+- **Responsive Design:** Mobile-first layouts using Tailwind CSS.
+- **Lazy Loading:** Efficient image and thumbnail loading for fast performance.
+- **Accessibility:** Keyboard navigation and ARIA support.
+- **Modern UI:** Glassmorphism and elegant visual effects.
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm (v8+ recommended)
+
+### Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/InteriorDesignStudio.git
+   cd InteriorDesignStudio
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm start
+   ```
+   The app will be available at [http://localhost:4200](http://localhost:4200).
+
+---
+
+## Project Structure
+```
+├── src/
+│   ├── app/
+│   │   ├── components/      # Angular components (portfolio, slideshow, about, etc.)
+│   │   ├── services/        # Data and image services
+│   │   ├── interfaces/      # TypeScript interfaces
+│   ├── assets/              # Static images and assets
+│   ├── styles/              # Global and component styles
+├── scripts/                 # Image optimization and manifest scripts
+├── public/                  # Public assets and favicon
+├── angular.json             # Angular configuration
+├── tailwind.config.js       # Tailwind CSS configuration
+└── package.json             # Project metadata and scripts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Scripts
+- `npm start` — Run the development server
+- `npm run build` — Build for production
+- `npm run test` — Run unit tests
+- `node scripts/optimize-portfolio-images.js` — Optimize portfolio images
+- `node scripts/generate-portfolio-manifest.js` — Generate image manifest for projects
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Customization
+- **Add Projects:** Update portfolio data in the relevant service or JSON file.
+- **Change Styles:** Modify Tailwind and SCSS files in `src/styles/`.
+- **Assets:** Place optimized images in `src/assets/images/` or `public/assets/optimized/`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Contributing
+Contributions are welcome! Please open issues or submit pull requests for improvements, bug fixes, or new features.
 
-## Building
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a pull request
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## License
+This project is licensed under the MIT License.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+If you need further customization or want to add specific sections (like deployment or API docs), let me know!

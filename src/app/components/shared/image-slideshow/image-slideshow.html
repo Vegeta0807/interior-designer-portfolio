@@ -54,11 +54,11 @@
         [class.border-white/20]="$index !== currentIndex()">
         <!-- Only load thumbnail when it's the current slide or adjacent slides -->
         <img 
-          [attr.data-src]="image.src"
-          [src]="shouldLoadThumbnail($index) ? image.src : 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&q=10'"
+          [attr.data-src]="image.thumbnail"
+          [src]="shouldLoadThumbnail($index) ? image.thumbnail : 'https://via.placeholder.com/80x60?text=...'"
           [alt]="image.alt"
           class="w-full h-full object-cover"
-          (error)="onImageError($event, 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&q=10')">
+          (error)="shouldLoadThumbnail($index) ? onImageError($event, 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&q=10') : null">
       </button>
     }
   </div>
